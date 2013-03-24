@@ -14,9 +14,12 @@ class Numbers:
     def next(self):
 
 	if self.number == self.top:
-	    self.valid = False
-	    return False
-	    #self.number = 0 # DEBUG: start over
+	    # option: don't show any more numbers
+	    #self.valid = False
+	    #return False
+
+	    # option: start over at 1
+	    self.number = 0
 
 	self.number += 1
 	self.rand_pos()
