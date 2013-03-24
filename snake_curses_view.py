@@ -15,6 +15,7 @@ class SnakeCursesView:
 	self.w = window
 	self.snakes = []
 	self.w.erase() # clear the window
+	self.listeners = []
 
     def add(self, snake):
 	self.snakes += [snake]
@@ -27,7 +28,10 @@ class SnakeCursesView:
     def undraw(self):
 	self.draw(' ')
 
+    def add_action_listener(self, listener):
+	self.listeners.append(listener)
+
     def got_key(self, ch):
 	direction = SnakeCursesView.KEY_MAP[ch]
-	for snake in self.snakes:
-	    snake.turn(direction)
+	for listener in self.listeners:
+	    listener.turn(direction)

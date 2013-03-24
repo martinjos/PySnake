@@ -18,12 +18,16 @@ class SnakeGame:
 
 	self.view = SnakeCursesView(self.w)
 	self.view.add(self.snake)
+	self.view.add_action_listener(self)
+
+    def turn(self, direction):
+	self.snake.turn(direction)
 
     def run(self):
 	while True:
 	    self.view.draw()
 	    self.w.refresh()
-	    time.sleep(1)
+	    time.sleep(0.5)
 	    self.view.undraw()
 
 	    ch = self.w.getch()
