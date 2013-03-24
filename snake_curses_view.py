@@ -18,6 +18,18 @@ class SnakeCursesView:
 	self.listeners = []
 
     def draw(self, ch = '*'):
+	self.draw_numbers(ch)
+	self.draw_snakes(ch)
+
+    def draw_numbers(self, ch):
+	num = self.game.get_numbers()
+	if num.is_valid():
+	    nch = ' '
+	    if ch != ' ':
+		nch = chr(ord('0') + num.get_number())
+	    self.w.addch(num.get_y(), num.get_x(), nch)
+
+    def draw_snakes(self, ch):
 	for snake in self.game.get_snakes():
 	    for cell in snake.get_cells():
 		self.w.addch(cell[1], cell[0], ch)

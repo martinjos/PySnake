@@ -14,6 +14,7 @@ class SnakeGame:
 
 	self.game = Game(80, 24)
 	self.game.add_snake(self.snake)
+	self.game.start()
 
 	self.w = curses.initscr()
 	self.w.nodelay(True)
@@ -30,7 +31,7 @@ class SnakeGame:
 	while True:
 	    self.view.draw()
 	    self.w.refresh()
-	    time.sleep(0.5)
+	    time.sleep(0.1)
 	    self.view.undraw()
 
 	    ch = self.w.getch()
@@ -40,7 +41,7 @@ class SnakeGame:
 	    elif ch != -1:
 		break
 
-	    self.snake.tick()
+	    self.game.tick()
 
 def main():
     try:

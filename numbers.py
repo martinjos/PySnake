@@ -1,3 +1,5 @@
+import random
+
 class Numbers:
 
     def __init__(self, w, h, checker):
@@ -7,20 +9,24 @@ class Numbers:
 	self.h = h
 	self.x = self.y = -1
 	self.checker = checker
+	self.valid = False
 
-    def next():
+    def next(self):
 	if self.number == self.top:
+	    self.valid = False
 	    return False
 	self.number += 1
-	rand_pos()
+	self.rand_pos()
 	while not self.checker.check_space_empty(self.x, self.y):
-	    rand_pos()
+	    self.rand_pos()
+	self.valid = True
 	return True
 
-    def rand_pos():
+    def rand_pos(self):
 	self.x = random.randint(0, self.w)
 	self.y = random.randint(0, self.h)
 
-    def get_x(): return x
-    def get_y(): return y
-    def get_number(): return number
+    def get_x(self): return self.x
+    def get_y(self): return self.y
+    def get_number(self): return self.number
+    def is_valid(self): return self.valid
