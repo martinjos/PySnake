@@ -13,8 +13,9 @@ class Numbers:
 
     def next(self):
 	if self.number == self.top:
-	    self.valid = False
-	    return False
+	    #self.valid = False
+	    #return False
+	    self.number = 0 # DEBUG: start over
 	self.number += 1
 	self.rand_pos()
 	while not self.checker.check_space_empty(self.x, self.y):
@@ -23,8 +24,8 @@ class Numbers:
 	return True
 
     def rand_pos(self):
-	self.x = random.randint(0, self.w)
-	self.y = random.randint(0, self.h)
+	self.x = random.randint(0, self.w - 1)
+	self.y = random.randint(0, self.h - 1)
 
     def get_x(self): return self.x
     def get_y(self): return self.y
