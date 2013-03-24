@@ -1,4 +1,15 @@
+import curses
+
+from snake import Snake
+
 class SnakeCursesView:
+
+    KEY_MAP = {
+	curses.KEY_UP: Snake.UP,
+	curses.KEY_DOWN: Snake.DOWN,
+	curses.KEY_LEFT: Snake.LEFT,
+	curses.KEY_RIGHT: Snake.RIGHT
+    }
 
     def __init__(self, window):
 	self.w = window
@@ -15,3 +26,8 @@ class SnakeCursesView:
 
     def undraw(self):
 	self.draw(' ')
+
+    def got_key(self, ch):
+	direction = SnakeCursesView.KEY_MAP[ch]
+	for snake in self.snakes:
+	    snake.turn(direction)
