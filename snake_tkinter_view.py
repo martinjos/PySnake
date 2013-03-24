@@ -29,7 +29,7 @@ class SnakeTkinterView:
 	    y = num.get_y() * self.side
 	    ch = chr(ord('0') + num.get_number())
 	    self.c.create_text(x, y,
-			       text=ch, fill="white")
+			       text=ch, anchor="nw", fill="white")
 
     def draw_snakes(self):
 	for snake in self.game.get_snakes():
