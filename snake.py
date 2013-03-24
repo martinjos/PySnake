@@ -13,12 +13,12 @@ class Snake:
     def tick(self, grow = False):
 	if not grow:
 	    self.cells.pop(0)
-	self.cells.append(map(lambda x, y: x + y, self.cells[-1],
-						  self.direction))
+	self.cells.append(tuple(map(lambda x, y: x + y, self.cells[-1],
+						        self.direction)))
 	self.last_direction = self.direction
 
     def turn(self, direction):
-	if direction != map(lambda x: -x, self.last_direction):
+	if direction != tuple(map(lambda x: -x, self.last_direction)):
 	    self.direction = direction
 	    return True
 	return False
