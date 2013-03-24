@@ -7,7 +7,7 @@ from game import Game
 import curses
 import time
 
-class SnakeGame:
+class SnakeCursesGame:
 
     def __init__(self):
 	self.snake = Snake()
@@ -45,7 +45,7 @@ class SnakeGame:
 
 def main():
     try:
-	game = SnakeGame()
+	game = SnakeCursesGame()
 	game.run()
     finally:
 	try:

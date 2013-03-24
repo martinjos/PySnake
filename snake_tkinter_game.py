@@ -1,57 +1,52 @@
 #!/usr/bin/env python
 
 from snake import Snake
-from snake_curses_view import SnakeCursesView
+from snake_tkinter_view import SnakeTkinterView
 from game import Game
 
-import curses
+import Tkinter
 import time
 
-class SnakeGame:
+class SnakeTkinterGame:
 
     def __init__(self):
+	cols = 50
+	rows = 50
+	side = 10
+
 	self.snake = Snake()
 
-	self.game = Game(80, 24)
+	self.game = Game(cols, rows)
 	self.game.add_snake(self.snake)
 	self.game.start()
 
-	self.w = curses.initscr()
-	self.w.nodelay(True)
-	self.w.keypad(True)
-	curses.curs_set(0) # hide cursor
+	self.w = Tkinter.Canvas(width=side*cols,
+				height=side*rows,
+				background='black')
+	self.w.pack()
 
-	self.view = SnakeCursesView(self.w, self.game)
+	self.view = SnakeTkinterView(self.w, side, self.game)
 	self.view.add_action_listener(self)
+
+	for key in ["<Left>", "<Right>", "<Up>", "<Down>"]:
+	    self.w.bind(key, self.view.got_key)
 
     def turn_action(self, direction):
 	self.snake.turn(direction)
 
+    def tick(self):
+	self.game.tick()
+	self.view.draw()
+	self.w.after(100, self.tick) # keep going
+
     def run(self):
-	while True:
-	    self.view.draw()
-	    self.w.refresh()
-	    time.sleep(0.1)
-	    self.view.undraw()
-
-	    ch = self.w.getch()
-	    if ch in [curses.KEY_UP, curses.KEY_DOWN,
-		      curses.KEY_LEFT, curses.KEY_RIGHT]:
-		self.view.got_key(ch)
-	    elif ch != -1:
-		break
-
-	    self.game.tick()
+	self.view.draw()
+	self.w.after(100, self.tick)
+	self.w.mainloop()
 
 def main():
-    try:
-	game = SnakeGame()
-	game.run()
-    finally:
-	try:
-	    curses.endwin() # ensure that exceptions display correctly
-	except:
-	    pass
+    game = SnakeTkinterGame()
+    game.run()
 
 if __name__ == '__main__':
     main()
