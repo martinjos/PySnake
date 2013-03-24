@@ -18,10 +18,10 @@ class Snake:
 	self.last_direction = self.direction
 
     def turn(self, direction):
-	if direction != tuple(map(lambda x: -x, self.last_direction)):
-	    self.direction = direction
-	    return True
-	return False
+	if direction == tuple(map(lambda x: -x, self.last_direction)):
+	    return False # snake wants to fold over
+	self.direction = direction
+	return True
 
     def get_cells(self):
 	return self.cells

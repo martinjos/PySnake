@@ -34,4 +34,4 @@ class SnakeCursesView:
     def got_key(self, ch):
 	direction = SnakeCursesView.KEY_MAP[ch]
 	for listener in self.listeners:
-	    listener.turn(direction)
+	    listener.turn_action(direction)

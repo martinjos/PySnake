@@ -2,6 +2,7 @@
 
 from snake import Snake
 from snake_curses_view import SnakeCursesView
+from numbers import Numbers
 
 import curses
 import time
@@ -10,6 +11,7 @@ class SnakeGame:
 
     def __init__(self):
 	self.snake = Snake()
+	self.numbers = Numbers(80, 24)
 
 	self.w = curses.initscr()
 	self.w.nodelay(True)
@@ -20,7 +22,7 @@ class SnakeGame:
 	self.view.add(self.snake)
 	self.view.add_action_listener(self)
 
-    def turn(self, direction):
+    def turn_action(self, direction):
 	self.snake.turn(direction)
 
     def run(self):
@@ -44,7 +46,10 @@ def main():
 	game = SnakeGame()
 	game.run()
     finally:
-	curses.endwin() # ensure that exceptions display correctly
+	try:
+	    curses.endwin() # ensure that exceptions display correctly
+	except:
+	    pass
 
 if __name__ == '__main__':
     main()
