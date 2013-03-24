@@ -1,18 +1,19 @@
 class Numbers:
 
-    def __init__(self, w, h):
+    def __init__(self, w, h, checker):
 	self.number = 0
 	self.top = 9
 	self.w = w
 	self.h = h
 	self.x = self.y = -1
+	self.checker = checker
 
     def next():
 	if self.number == self.top:
 	    return False
 	self.number += 1
 	rand_pos()
-	while not self.checker.check(self.x, self.y):
+	while not self.checker.check_space_empty(self.x, self.y):
 	    rand_pos()
 	return True
 
