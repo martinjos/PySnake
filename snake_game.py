@@ -2,7 +2,7 @@
 
 from snake import Snake
 from snake_curses_view import SnakeCursesView
-from numbers import Numbers
+from game import Game
 
 import curses
 import time
@@ -11,15 +11,16 @@ class SnakeGame:
 
     def __init__(self):
 	self.snake = Snake()
-	self.numbers = Numbers(80, 24)
+
+	self.game = Game(80, 24)
+	self.game.add_snake(self.snake)
 
 	self.w = curses.initscr()
 	self.w.nodelay(True)
 	self.w.keypad(True)
 	curses.curs_set(0) # hide cursor
 
-	self.view = SnakeCursesView(self.w)
-	self.view.add(self.snake)
+	self.view = SnakeCursesView(self.w, self.game)
 	self.view.add_action_listener(self)
 
     def turn_action(self, direction):

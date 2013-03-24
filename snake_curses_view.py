@@ -11,17 +11,14 @@ class SnakeCursesView:
 	curses.KEY_RIGHT: Snake.RIGHT
     }
 
-    def __init__(self, window):
+    def __init__(self, window, game):
 	self.w = window
-	self.snakes = []
 	self.w.erase() # clear the window
+	self.game = game
 	self.listeners = []
 
-    def add(self, snake):
-	self.snakes += [snake]
-
     def draw(self, ch = '*'):
-	for snake in self.snakes:
+	for snake in self.game.get_snakes():
 	    for cell in snake.get_cells():
 		self.w.addch(cell[1], cell[0], ch)
 
