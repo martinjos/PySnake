@@ -12,10 +12,12 @@ class Numbers:
 	self.valid = False
 
     def next(self):
+
 	if self.number == self.top:
-	    #self.valid = False
-	    #return False
-	    self.number = 0 # DEBUG: start over
+	    self.valid = False
+	    return False
+	    #self.number = 0 # DEBUG: start over
+
 	self.number += 1
 	self.rand_pos()
 	while not self.checker.check_space_empty(self.x, self.y):
