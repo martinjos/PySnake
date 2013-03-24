@@ -20,12 +20,14 @@ class SnakeTkinterGame:
 	self.game.add_snake(self.snake)
 	self.game.start()
 
-	self.w = Tkinter.Canvas(width=side*cols,
+	self.w = Tkinter.Tk()
+	self.c = Tkinter.Canvas(self.w,
+				width=side*cols,
 				height=side*rows,
 				background='black')
-	self.w.pack()
+	self.c.pack()
 
-	self.view = SnakeTkinterView(self.w, side, self.game)
+	self.view = SnakeTkinterView(self.c, side, self.game)
 	self.view.add_action_listener(self)
 
 	for key in ["<Left>", "<Right>", "<Up>", "<Down>"]:
@@ -37,12 +39,12 @@ class SnakeTkinterGame:
     def tick(self):
 	self.game.tick()
 	self.view.draw()
-	self.w.after(100, self.tick) # keep going
+	self.c.after(100, self.tick) # keep going
 
     def run(self):
 	self.view.draw()
-	self.w.after(100, self.tick)
-	self.w.mainloop()
+	self.c.after(100, self.tick)
+	self.c.mainloop()
 
 def main():
     game = SnakeTkinterGame()
